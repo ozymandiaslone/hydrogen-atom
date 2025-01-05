@@ -5,4 +5,5 @@ edition = "2024"
 
 [dependencies]
 num-complex = "0.4.6"
+rug = "1.26.1"
 sphrs = "0.2.2"
