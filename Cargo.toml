@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+macroquad = "0.4.13"
 num-complex = "0.4.6"
 rug = "1.26.1"
 sphrs = "0.2.2"
