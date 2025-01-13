@@ -4,6 +4,8 @@ use rug::{Complex, Float, Integer, Assign};
 use std::io::{self, Write};
 use sphrs::{Coordinates, ComplexSH, SHEval};
 
+use crate::ui::*;
+
 
 pub fn factorial(num: &Integer) -> Integer {
   let mut result = Integer::from(1);
@@ -242,9 +244,42 @@ pub fn get_theta_slice(n: i64, l: i64, m: i64, theta: f64) -> Texture2D {
     Texture2D::from_image(&image_slice)
 }
 
+pub fn calculate_possible_eigenstates_recursive(n: i64) -> i64 {
+  //base case
+  if n == 1 {
+    1
+  } else {
+    calculate_possible_eigenstates_recursive(n - 1) + n*n
+  }
+}
 
-
-
+pub fn calculate_n_states(n: i64) -> Vec<Box<dyn UIElement>> {
+  let portrait = if screen_width() > screen_height() { false } else { true };
+  let mut eigenstates: Vec<Box<dyn UIElement>> = Vec::new();
+  let x = if portrait { screen_width() / 5.} else {screen_width() * 0.66 / 5. };
+  for tn in 1..=n {
+    for l in 0..tn {
+      for m in -l..=l {
+        println!("n: {}, l: {}, m: {}", tn, l, m);
+        let mut image = Image::gen_image_color(x as u16, x as u16, WHITE);
+        let eigenstate = Eigenstate {
+          texture: get_phi_slice(
+            tn,
+            l,
+            m,
+            0.,
+            &mut image,
+          ),
+          hovered: false,
+          position: (0.,0.),
+          info: format!("N: {} L: {} M: {}", tn, l, m) 
+        };
+        eigenstates.push(Box::new(eigenstate));
+      }
+    }
+  }
+  eigenstates
+}
 
 struct PolarCamera {
   camera: Camera3D,
