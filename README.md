@@ -4,7 +4,7 @@
 
 ### The Goal
 Let's set the stage: the end goal of this project is to generate visualization of the Electron "Orbitals" which many people will be familiar with from classes such as highschool chemistry.
-[Here is a video of what the program currently visualizes.](./hydrogen-demo0.mkv)
+![Here is a video of what the program currently visualizes.](./hydrogen-demo0.gif)
 
 
 #### A (very) quick crashcourse in Quantum Mechanics
